@@ -234,6 +234,70 @@ exports.deleteAll = (req, res) => {
 
     });
 
+    // Find a single Product with title
+exports.findOneByTitle = (req, res) => {
+  const title = req.params.title;
+
+  Products.findOne({ title: title })
+    .then(data => {
+      if (!data)
+        res.status(404).send({ message: "Not found Product with title " + title });
+      else res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({ message: "Error retrieving Product with title=" + title });
+    });
+};
+
+
+// Update a Product by title in the request
+exports.updateByTitle = (req, res) => {
+  if (!req.body) {
+    return res.status(400).send({
+      message: "Data to update can not be empty!"
+    });
+  }
+
+  const title = req.params.title;
+
+  Products.findOneAndUpdate({ title: title }, req.body, { useFindAndModify: false })
+    .then(data => {
+      if (!data) {
+        res.status(404).send({
+          message: `Cannot update Product with title=${title}. Maybe Product was not found!`
+        });
+      } else res.send({ message: "Product was updated successfully." });
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error updating Product with title=" + title
+      });
+    });
+};
+
+// Delete a Product with the specified title in the request
+exports.deleteByTitle = (req, res) => {
+  const title = req.params.title;
+
+  Products.findOneAndRemove({ title: title })
+    .then(data => {
+      if (!data) {
+        res.status(404).send({
+          message: `Cannot delete Product with title=${title}. Maybe Product was not found!`
+        });
+      } else {
+        res.send({
+          message: "Product was deleted successfully!"
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Could not delete Product with title=" + title
+      });
+    });
+};
+
 
 
 };

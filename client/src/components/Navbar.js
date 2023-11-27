@@ -33,6 +33,10 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
           <>
             <NavLink to="/userhomepage" className={({ isActive }) => isActive ? "active-link" : ""}>Books</NavLink>
             <NavLink to="/my-profile" className={({ isActive }) => isActive ? "active-link" : ""}>My Profile</NavLink>
+            <NavLink to="/add-book">Add Book</NavLink>
+            <NavLink to="/search">Search by Title</NavLink>
+            <NavLink to="/delete-product-by-title">Remove Books by Title</NavLink>
+            <NavLink to="/update-product-by-title">Update Book</NavLink>
             <button onClick={handleLogout} className="logout-button">Sign Out</button>
           </>
         ) : (

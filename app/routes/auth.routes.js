@@ -26,4 +26,26 @@ router.get('/example-protected-route', requireSignIn, (req, res) => {
   });
 });
 
+// Additional protected routes
+router.get('/add-book', requireSignIn, (req, res) => {
+  // Logic for adding a book
+  res.json({ message: "Add Book Route - Protected", user: req.auth });
+});
+
+router.get('/delete-product-by-title', requireSignIn, (req, res) => {
+  // Logic for deleting a product by title
+  res.json({ message: "Delete Product by Title Route - Protected", user: req.auth });
+});
+
+router.get('/search', requireSignIn, (req, res) => {
+  // Logic for searching by title
+  res.json({ message: "Search by Title Route - Protected", user: req.auth });
+});
+
+router.get('/update-product-by-title', requireSignIn, (req, res) => {
+  // Logic for updating a book by title
+  res.json({ message: "Update Book by Title Route - Protected", user: req.auth });
+});
+
+
 module.exports = router;
